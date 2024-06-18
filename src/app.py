@@ -127,7 +127,7 @@ def get_search_result(query, conversation_history):
     print("---------------COMBINED_INFOMATION-------------------------")
     return combined_information
 
-def get_re1
+    num_recent_messages = 1
     recent_messages_count = 0
 
     # Iterate through chat history in reverse to get the most recent messages
