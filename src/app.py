@@ -49,9 +49,10 @@ def get_embedding(text: str) -> list[float]:
         print("Attempted to get embedding for empty text")
         return []
 
-    embedding = embedding_model.encode(text)
-
-    return embedding.tolist()
+    response = genai.embed_content(model="models/text-embedding-004", content=text)
+    embedding = response['embedding']
+        
+    return embedding
 
 def vector_search(user_query):
     """
@@ -78,7 +79,7 @@ def vector_search(user_query):
             "queryVector": query_embedding,
             "path": "client_embedding",
             "numCandidates": 150,   # Number of candidate matches to consider
-            "limit": 1              # Return top 2 matches
+            "limit": 2              # Return top 2 matches
         }
     }
 
@@ -112,7 +113,6 @@ def get_search_result(query, conversation_history):
         # print('---result', result)
         search_result += f"Answer: {result.get('therapist', 'N/A')}"
         search_result += "\n"
-
     combined_information = (
         f"{conversation_history}\n"
         "Based on the above conversation, it is crucial to provide an answer that is relevant and contextualized. "
@@ -151,7 +151,7 @@ if user_query:
     conversation_history = ""
 
     # Limit the number of recent messages to concatenate
-    num_recent_messages = 1 
+    num_recent_messages = 3
     recent_messages_count = 0
 
     # Iterate through chat history in reverse to get the most recent messages
