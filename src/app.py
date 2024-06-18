@@ -127,7 +127,31 @@ def get_search_result(query, conversation_history):
     print("---------------COMBINED_INFOMATION-------------------------")
     return combined_information
 
-    num_recent_messages = 1
+def get_response(rag_user_query):
+    response = model.generate_content(rag_user_query)
+    print("---------------RESPONSE-------------------------")
+    print(response.text)
+    print("---------------RESPONSE-------------------------")
+    return(response.text)
+
+# App config
+st.set_page_config(page_title="Chat with AI-Therapist", page_icon="🤖")
+st.title("Chat with AI-Therapist")
+
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = [
+        AIMessage(content="Hello, I am a AI-Therapist. How can I help you?"),
+    ]
+
+user_query = st.chat_input("Type your message here...")
+
+if user_query:
+    
+    # Initialize conversation history string
+    conversation_history = ""
+
+    # Limit the number of recent messages to concatenate
+    num_recent_messages = 1 
     recent_messages_count = 0
 
     # Iterate through chat history in reverse to get the most recent messages
