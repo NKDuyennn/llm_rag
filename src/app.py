@@ -2,7 +2,7 @@ import streamlit as st
 import pymongo
 import google.generativeai as genai
 import os
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
 from langchain_core.messages import AIMessage, HumanMessage
 from dotenv import load_dotenv
 # import PyPDF2
@@ -12,12 +12,12 @@ load_dotenv()
 
 # Access the key
 MONGODB_URI = os.getenv('MONGODB_URI')
-EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL') or 'keepitreal/vietnamese-sbert'
+# EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL') or 'keepitreal/vietnamese-sbert'
 DB_NAME = os.getenv('DB_NAME')
 DB_COLLECTION = os.getenv('DB_COLLECTION')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
-embedding_model = SentenceTransformer(EMBEDDING_MODEL)
+# embedding_model = SentenceTransformer(EMBEDDING_MODEL)
 
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
