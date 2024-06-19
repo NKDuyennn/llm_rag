@@ -198,5 +198,5 @@ if sidebar_selection == "Vision Mamba":
                 st.write(message.content)
 
 elif sidebar_selection == "AI-Therapist":
-    st.markdown('<meta http-equiv="refresh" content="0; url=https://share.streamlit.io/app/nkduyen-chattherapist/">', unsafe_allow_html=True)
+    st.markdown('<meta http-equiv="refresh" content="0; url=https://nkduyen-therapist.streamlit.app/">', unsafe_allow_html=True)
 
