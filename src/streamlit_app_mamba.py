@@ -144,24 +144,17 @@ sidebar_selection = st.sidebar.selectbox(
     "Choose an option",
     ["Home", "AI-Therapist"]
 )
-# JavaScript để mở liên kết trong tab mới
-def open_link(url):
-    js = f"window.open('{url}');"
-    html = f"<script>{js}</script>"
-    st.components.v1.html(html, height=0)
+
+# Hàm mở liên kết trong tab mới
+def open_link_in_new_tab(url):
+    js_code = f'<a href="{url}" target="_blank" id="external-link"></a>'
+    js_code += '<script>document.getElementById("external-link").click();</script>'
+    st.markdown(js_code, unsafe_allow_html=True)
 
 if sidebar_selection == "AI-Therapist":
     # Nút bấm mở liên kết
     if st.button('Go to AI-Therapist'):
-        open_link("https://nkduyen-therapist.streamlit.app/")
-
-
-st.title("Q&A about Vision Mamba")
-
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = [
-        AIMessage(content="Hello, I am a AI. How can I help you?"),
-    ]
+        open_link_in_new_tab("https://nkduyen-therapist.streamlit.app/")
 
 user_query = st.chat_input("Type your message here...")
 
