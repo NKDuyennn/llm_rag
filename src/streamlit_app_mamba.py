@@ -198,5 +198,5 @@ if sidebar_selection == "Vision Mamba":
                 st.write(message.content)
 
 elif sidebar_selection == "AI-Therapist":
-    st.markdown('<meta http-equiv="refresh" content="0; url=https://huggingface.co/datasets/fadodr/mental_health_dataset">', unsafe_allow_html=True)
+    st.markdown('<a href="https://nkduyen-therapist.streamlit.app/">Click here to access the Chat with AI-Therapist</a>', unsafe_allow_html=True)
 
