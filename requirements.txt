@@ -1,8 +1,10 @@
 streamlit
 pymongo
-sentence_transformers
-transformers
+# sentence_transformers
+# transformers
 accelerate          # if use GPU
 google-generativeai
 langchain_core
 python-dotenv
+pypdf
+langchain_community
