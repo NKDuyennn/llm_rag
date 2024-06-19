@@ -139,67 +139,64 @@ def get_response(rag_user_query):
 # Page config
 st.set_page_config(page_title="Chat with me", page_icon="🤖")
 
-# Sidebar menu
-sidebar_selection = st.sidebar.selectbox(
-    "Choose an option",
-    ["Home", "AI-Therapist"]
-)
+# Sidebar buttons
+sidebar_selection = st.sidebar.selectbox("Choose a page:", ["Vision Mamba", "AI-Therapist"])
 
-# Hàm mở liên kết trong tab mới
-def open_link_in_new_tab(url):
-    js_code = f'<a href="{url}" target="_blank" id="external-link"></a>'
-    js_code += '<script>document.getElementById("external-link").click();</script>'
-    st.markdown(js_code, unsafe_allow_html=True)
+if sidebar_selection == "Vision Mamba":
 
-if sidebar_selection == "AI-Therapist":
-    # Nút bấm mở liên kết
-    if st.button('Go to AI-Therapist'):
-        open_link_in_new_tab("https://nkduyen-therapist.streamlit.app/")
+    st.title("Q&A about Vision Mamba")
 
-user_query = st.chat_input("Type your message here...")
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = [
+            AIMessage(content="Hello, I am a AI. How can I help you?"),
+        ]
 
-if user_query:
-    
-    # Initialize conversation history string
-    conversation_history = ""
+    user_query = st.chat_input("Type your message here...")
 
-    # Limit the number of recent messages to concatenate
-    num_recent_messages = 3
-    recent_messages_count = 0
-
-    # Iterate through chat history in reverse to get the most recent messages
-    for message in reversed(st.session_state.chat_history):
-        if recent_messages_count >= num_recent_messages:
-            break
+    if user_query:
         
-        if isinstance(message, HumanMessage):
-            conversation_history = f"User: {message.content}\n" + conversation_history
-            recent_messages_count += 1
-        elif isinstance(message, AIMessage):
-            conversation_history = f"Bot: {message.content}\n" + conversation_history
+        # Initialize conversation history string
+        conversation_history = ""
+
+        # Limit the number of recent messages to concatenate
+        num_recent_messages = 3
+        recent_messages_count = 0
+
+        # Iterate through chat history in reverse to get the most recent messages
+        for message in reversed(st.session_state.chat_history):
+            if recent_messages_count >= num_recent_messages:
+                break
+            
+            if isinstance(message, HumanMessage):
+                conversation_history = f"User: {message.content}\n" + conversation_history
+                recent_messages_count += 1
+            elif isinstance(message, AIMessage):
+                conversation_history = f"Bot: {message.content}\n" + conversation_history
+            
         
-    
-    print("---------------CONVERSATION_HISTORY-------------------------")
-    print(conversation_history)
-    print("---------------CONVERSATION_HISTORY-------------------------")
-    # conversation_history += "Given the above conversation, "
+        print("---------------CONVERSATION_HISTORY-------------------------")
+        print(conversation_history)
+        print("---------------CONVERSATION_HISTORY-------------------------")
+        # conversation_history += "Given the above conversation, "
 
-    st.session_state.chat_history.append(HumanMessage(content=user_query))
-    
-    # Get the RAG-based search result
-    rag_user_query = get_search_result(user_query, conversation_history)
+        st.session_state.chat_history.append(HumanMessage(content=user_query))
+        
+        # Get the RAG-based search result
+        rag_user_query = get_search_result(user_query, conversation_history)
 
-    # Get the response from the model
-    response = get_response(rag_user_query)
-    st.session_state.chat_history.append(AIMessage(content=response))
+        # Get the response from the model
+        response = get_response(rag_user_query)
+        st.session_state.chat_history.append(AIMessage(content=response))
 
-# Conversation
-for message in st.session_state.chat_history:
-    if isinstance(message, AIMessage):
-        with st.chat_message("AI"):
-            st.write(message.content)
-    elif isinstance(message, HumanMessage):
-        with st.chat_message("Human"):
-            st.write(message.content)
+    # Conversation
+    for message in st.session_state.chat_history:
+        if isinstance(message, AIMessage):
+            with st.chat_message("AI"):
+                st.write(message.content)
+        elif isinstance(message, HumanMessage):
+            with st.chat_message("Human"):
+                st.write(message.content)
 
+elif sidebar_selection == "AI-Therapist":
+    st.markdown('<meta http-equiv="refresh" content="0; url=https://huggingface.co/datasets/fadodr/mental_health_dataset">', unsafe_allow_html=True)
 
