@@ -11,8 +11,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Access the key
-MONGODB_URI = os.getenv('MONGODB_URI')
+MONGODB_URI = os.getenv('MONGODB_URI_1')
+# If local
 EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL') or 'keepitreal/vietnamese-sbert'
+
 DB_NAME = os.getenv('DB_NAME')
 DB_COLLECTION = os.getenv('DB_COLLECTION')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
@@ -78,7 +80,7 @@ def vector_search(user_query):
             "queryVector": query_embedding,
             "path": "client_embedding",
             "numCandidates": 150,   # Number of candidate matches to consider
-            "limit": 1              # Return top 2 matches
+            "limit": 2              # Return top 2 matches
         }
     }
 
@@ -112,7 +114,6 @@ def get_search_result(query, conversation_history):
         # print('---result', result)
         search_result += f"Answer: {result.get('therapist', 'N/A')}"
         search_result += "\n"
-
     combined_information = (
         f"{conversation_history}\n"
         "Based on the above conversation, it is crucial to provide an answer that is relevant and contextualized. "
@@ -151,7 +152,7 @@ if user_query:
     conversation_history = ""
 
     # Limit the number of recent messages to concatenate
-    num_recent_messages = 1 
+    num_recent_messages = 3
     recent_messages_count = 0
 
     # Iterate through chat history in reverse to get the most recent messages
