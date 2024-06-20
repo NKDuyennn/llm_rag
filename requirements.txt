@@ -8,3 +8,4 @@ langchain_core
 python-dotenv
 pypdf
 langchain_community
+tqdm
