@@ -114,7 +114,7 @@ def get_search_result(query, conversation_history):
     search_result = ""
     for  result in get_knowledge:
         # print('---result', result)
-        search_result += f"- {result.get('content', 'N/A')}"
+        search_result += f"Kết quả: {result.get('content', 'N/A')}"
         search_result += "\n"
     combined_information = (
         f"{conversation_history}\n"
