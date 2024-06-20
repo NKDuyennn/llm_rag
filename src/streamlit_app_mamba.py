@@ -113,14 +113,14 @@ def get_search_result(query, conversation_history):
     search_result = ""
     for  result in get_knowledge:
         # print('---result', result)
-        search_result += f"Kết quả: {result.get('content', 'N/A')}"
+        search_result += f"Infor: {result.get('content', 'N/A')}"
         search_result += "\n"
     combined_information = (
         f"{conversation_history}\n"
-        "Dựa vào đoạn hội thoại trên đây, dưới đây là câu hỏi tiếp theo cho đoạn hội thoại này."
-        "Hãy trả lời câu hỏi dưới đây với những thông tin liên quan từ đoạn hội thoại trên:\n"
-        f"Câu hỏi: {query}\n"
-        "Dưới đây là một số kết quả mà bạn có thể tham khảo: \n"
+        "Based on the above conversation, it is crucial to provide an answer that is relevant and contextualized. "
+        "Please focus on answering the following query in relation to the conversation:\n"
+        f"Query: {query}\n"
+        "Here are some results that may help in forming the answer:\n"
         f"{search_result}."
     )
 
