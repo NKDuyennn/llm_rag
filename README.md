@@ -29,7 +29,7 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 </p>
 
 - **Upload PDF Document** 📂: Tải lên file PDF chứa dữ liệu mà bạn muốn thêm thông tin cho Model
-- **Choose a page** 🔍: Có thể chọn một vài mô hình mà em đã cài đặt từ trước
+- **Choose a page** 🔍: Có thể chọn một vài mô hình mà mìnhmình đã cài đặt từ trước
     - **AI-Therapist**: Chatbot tư vấn tâm lý được đào tạo từ tập dữ liệu [mental-health-dataset](https://huggingface.co/datasets/fadodr/mental_health_dataset?row=75).
     - **Vision Mamba**: Chatbot trả lời thông tin liên quan về Mamba và Vision Mamba.
 - **Chat with your Custom Data** 💡: Nơi bạn có thể gửi câu hỏi của mình và nhận được câu trả lời theo thông tin bạn đã thêm vào.
@@ -74,11 +74,11 @@ llm_rag/
 ### **Bước 2: Tạo biến môi trường**
    Tạo một file `.env` trong dự án của bạn gồm có:
    ```
-    GOOGLE_API_KEY=<Gemnini API Key của bạn>
-    MONGODB_URI=<MongoDB-URI của bạn>
-    EMBEDDING_MODEL=<Đường dẫn model embedding Hugging face>  #Nếu không dùng Model Gemini Embedding
-    DB_NAME=<Database Name của bạn>
-    DB_COLLECTION=<Database Collection Name của bạn>
+    GOOGLE_API_KEY = <Gemnini API Key của bạn>
+    MONGODB_URI = <MongoDB-URI của bạn>
+    EMBEDDING_MODEL = <Đường dẫn model embedding Hugging face>  #Nếu không dùng Model Gemini Embedding
+    DB_NAME = <Database Name của bạn>
+    DB_COLLECTION = <Database Collection Name của bạn>
    ```
 
 ### **Bước 3: Cài đặt các thư viện cần thiết:**
