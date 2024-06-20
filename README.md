@@ -25,7 +25,7 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 Ứng dụng Streamlit LLM-RAG có giao diện như sau:
 
 <p align="center">
-  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/ui-customdata.png" width="100%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/ui.png" width="100%" />
 </p>
 
 - **Upload PDF Document** 📂: Tải lên file PDF chứa dữ liệu mà bạn muốn thêm thông tin cho Model
