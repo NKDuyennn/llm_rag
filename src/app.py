@@ -189,7 +189,6 @@ if uploaded_file is not None:
     except Exception as e:
         st.sidebar.error(f"Error deleting file: {e}")
         
-    upload_file = None
     
 # Sidebar buttons
 sidebar_selection = st.sidebar.selectbox("Choose a page:", ["Custom Data", "AI-Therapist", "Vision Mamba"])
