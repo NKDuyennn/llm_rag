@@ -185,6 +185,11 @@ if uploaded_file is not None:
     pdf_to_mongodb(save_path)
     st.sidebar.success(f"Update database sucessful")
 
+    try:
+        os.remove(save_path)
+        st.sidebar.success(f"File {uploaded_file.name} deleted from {save_path}")
+    except Exception as e:
+        st.sidebar.error(f"Error deleting file: {e}")
 
 # Initialize chat history in session state
 if "chat_history" not in st.session_state:
