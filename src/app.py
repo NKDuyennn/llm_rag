@@ -8,7 +8,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
 import pandas as pd
-from PyPDF2 import PdfReader
 
 # Load environment variables from .env file
 load_dotenv()
