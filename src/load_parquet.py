@@ -26,10 +26,7 @@ dataset_df = dataset_df.dropna(subset=["client"])
 print("\nNumber of missing values in each column after removal:")
 print(dataset_df.isnull().sum())
 
-# # Convert NumPy arrays in 'client_embedding' column to lists
-# dataset_df['client_embedding'] = dataset_df['client_embedding'].apply(lambda x: x.tolist() if isinstance(x, np.ndarray) else x)
 
-# dataset_df = dataset_df.to_string(index=False)
 def get_embedding(text: str) -> list[float]:
     if not text.strip():
         print("Attempted to get embedding for empty text")

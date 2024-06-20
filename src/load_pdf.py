@@ -1,8 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import pandas as pd
-import pandas as pd
-import numpy as np
 import google.generativeai as genai
 from tqdm import tqdm
 import pymongo
@@ -44,10 +42,8 @@ df = pd.DataFrame({'content': texts})
 dataset_df = df
 
 genai.configure(api_key=GOOGLE_API_KEY)
-# # Convert NumPy arrays in 'client_embedding' column to lists
-# dataset_df['client_embedding'] = dataset_df['client_embedding'].apply(lambda x: x.tolist() if isinstance(x, np.ndarray) else x)
 
-# dataset_df = dataset_df.to_string(index=False)
+
 def get_embedding(text: str) -> list[float]:
     if not text.strip():
         print("Attempted to get embedding for empty text")

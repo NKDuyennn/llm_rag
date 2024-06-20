@@ -5,18 +5,18 @@ import os
 # from sentence_transformers import SentenceTransformer
 from langchain_core.messages import AIMessage, HumanMessage
 from dotenv import load_dotenv
-# import PyPDF2
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Access the key
 MONGODB_URI = os.getenv('MONGODB_URI_2')
-# EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL') or 'keepitreal/vietnamese-sbert'
 DB_NAME = os.getenv('DB_NAME')
 DB_COLLECTION = os.getenv('DB_COLLECTION_2')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
+# if use Sentence Transformer
+# EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL') or 'keepitreal/vietnamese-sbert'
 # embedding_model = SentenceTransformer(EMBEDDING_MODEL)
 
 genai.configure(api_key=GOOGLE_API_KEY)
@@ -48,6 +48,9 @@ def get_embedding(text: str) -> list[float]:
     if not text.strip():
         print("Attempted to get embedding for empty text")
         return []
+
+    # if use Sentence Transformer
+    # embedding = embedding_model.encode(text)
 
     response = genai.embed_content(model="models/text-embedding-004", content=text)
     embedding = response['embedding']
@@ -198,5 +201,5 @@ if sidebar_selection == "Vision Mamba":
                 st.write(message.content)
 
 elif sidebar_selection == "AI-Therapist":
-    st.markdown('<a href="https://nkduyen-therapist.streamlit.app/">Click here to access the Chat with AI-Therapist</a>', unsafe_allow_html=True)
+    st.markdown('<meta http-equiv="refresh" content="0; url=https://huggingface.co/datasets/fadodr/mental_health_dataset">', unsafe_allow_html=True)
 
