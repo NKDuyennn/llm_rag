@@ -2,11 +2,14 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import pandas as pd
 import google.generativeai as genai
+from dotenv import load_dotenv
 from tqdm import tqdm
 import pymongo
 import os
 import time
 
+# Load environment variables from .env file
+load_dotenv()
 # Access the key
 MONGODB_URI = os.getenv('MONGODB_URI_2')
 DB_NAME = os.getenv('DB_NAME')
@@ -14,7 +17,7 @@ DB_COLLECTION = os.getenv('DB_COLLECTION_2')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 # Đường dẫn tới tệp PDF
-pdf_path = 'D:\\Work\\Jobfair\\RAG_gemini_mongoDB\\data\\pdf\\2404.18861v1.pdf'
+pdf_path = 'D:\\Work\\Jobfair\\RAG_gemini_mongoDB\\data\\document\\2312.00752v2.pdf'
 
 # Tạo loader để tải tài liệu PDF
 loader = PyPDFLoader(pdf_path)
@@ -24,9 +27,12 @@ documents = loader.load()
 
 # Kiểm tra cấu trúc của documents
 print("Documents structure:", documents)
+# Xóa các trang từ 18 đến 23 (tại chỉ số từ 17 đến 22)
+if len(documents) > 22:
+    del documents[17:23]
 
 # Khởi tạo RecursiveCharacterTextSplitter
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=64)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=128)
 
 # Tách các tài liệu thành các đoạn nhỏ hơn
 document_chunks = text_splitter.split_documents(documents)
