@@ -12,13 +12,13 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 - **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF 
 
 ## ❓ Cách hoạt động:
-Ứng dụng Streamlit LLM-RAG được chia thành 2 phần:
+Ứng dụng Streamlit LLM-RAG có giao diện như sau:
 
 <p align="center">
-  <img src="https://github.com/labrijisaad/LLM-RAG/assets/74627083/61518120-e3a0-4e76-84ea-4fb11bd82e4a" width="60%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/ui-customdata.png" width="100%" />
 </p>
 
-- **Setup Knowledge Base** 📂: Upload markdown documents to establish the knowledge base.
+- **Upload PDF Document** 📂: Tải lên file PDF chứa dữ liệu mà bạn muốn thêm thông tin cho Model
 - **Explore Knowledge Base** 🔍: Browse and manage the uploaded documents.
 - **RAG Query** 💡: Pose questions to receive answers referencing the knowledge base and the model's knowledge.
 
