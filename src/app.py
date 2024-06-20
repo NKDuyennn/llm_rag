@@ -172,7 +172,7 @@ uploaded_file = st.sidebar.file_uploader("Choose a PDF file", type="pdf")
 
 if uploaded_file is not None:
     
-    save_folder = "D:\\Work\\Jobfair\\RAG_gemini_mongoDB\\data\\pdf"
+    save_folder = "data/pdf"
     if not os.path.exists(save_folder):
         os.makedirs(save_folder)
 
