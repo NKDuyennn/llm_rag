@@ -1,16 +1,17 @@
 # `LLM RAG` - Streamlit RAG Language Model App 🤖
 
-## 🌟 Overview 
+## 🌟 Tổng Quan 
 Streamlit App này sử dụng Retrieval-Augmented Generation (RAG) kết hợp với Large Language Model (LLM) của Gemini và MongoDB, một cơ sở dữ liệu cho phép lưu trữ và tìm kiếm theo vector. Ứng dụng cho phép người dùng tải lên file PDF 📂, đặt câu hỏi liên quan đến nội dung của các file này ❓ và nhận câu trả lời được tạo ra bởi AI-generated dựa trên nội dung đã tải lên 📚. 
 
 ## 🛠️ Cấu trúc hệ thống
-Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống
+Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 <p align="center">
-  <img src="https://github.com/labrijisaad/LLM-RAG/assets/74627083/61518120-e3a0-4e76-84ea-4fb11bd82e4a" width="100%" />
-</p>
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/diagram.jpg" width="100%" />
+</p>  
 
+- **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF 
 
-## ❓ How It Works
+## ❓ Cách hoạt động:
 The LLM RAG Streamlit app is structured into several key areas, each serving a specific function within the application:
 
 <p align="center">
@@ -33,54 +34,6 @@ Additionally, the app offers advanced settings for customization based on user n
 - **Max Completion Tokens**: Define the maximum length of the generated response.
 - **Drop All Documents in Knowledge Base**: Clear the database by typing a confirmatory command.
 
-## 🛠️ System Architecture
-The following diagram illustrates the flow of data through the system:
-
-```mermaid
-graph TD
-    A[Markdown Documents] -->|Data Cleaning &<br>Splitting in Chunks| B[Cleaned Text]
-    B -->|OpenAI Model<br>Embedding| C[Document Embeddings]
-    C -->|Store| D[(Vectorstore)]
-    D -->|Similarity Search| E[Relevant Documents]
- 
-    F[User Question] -->|OpenAI Model<br>Embedding| G[Query Embedding]
-    G -->|Fetch| D
- 
-    F --> J[Contextualized Prompt]
-    E --> J
-    J -->|OpenAI LLM Model| L[Answer]
- 
-    subgraph Data Preparation
-        A
-        B
-    end
- 
-    subgraph Vectorization
-        C
-        G
-    end
- 
-    subgraph Relevant Documents Retrieval
-        D
-        E
-    end
- 
-    subgraph LLM Querying
-        J
-        L
-    end
- 
-    %% Styles
-    style A fill:#7f7f7f,stroke:#fff,stroke-width:2px
-    style B fill:#8fa1b3,stroke:#fff,stroke-width:2px
-    style C fill:#8fa1b3,stroke:#fff,stroke-width:2px
-    style D fill:#8fa1b3,stroke:#fff,stroke-width:2px
-    style E fill:#8fa1b3,stroke:#fff,stroke-width:2px
-    style F fill:#7f7f7f,stroke:#fff,stroke-width:2px
-    style G fill:#8fa1b3,stroke:#fff,stroke-width:2px
-    style J fill:#e07b53,stroke:#fff,stroke-width:2px
-    style L fill:#e07b53,stroke:#fff,stroke-width:2px
-```
 
 ## Project Structure 🏗️
 The project's main directories are laid out as follows:
