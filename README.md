@@ -22,7 +22,8 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 - **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF 
 
 ## ❓ Cách hoạt động và Demo:
-- Bạn có thể sử dụng ứng dụng của mình tại đây: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)  
+- Bạn có thể sử dụng ứng dụng của mình tại đây: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)
+- **Lưu ý** 💡: Phải xóa file đã up lên trước khi hỏi
 Ứng dụng Streamlit LLM-RAG có giao diện như sau:
 
 <p align="center">
@@ -34,7 +35,10 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
     - **AI-Therapist**: Chatbot tư vấn tâm lý được đào tạo từ tập dữ liệu [mental-health-dataset](https://huggingface.co/datasets/fadodr/mental_health_dataset?row=75).
     - **Vision Mamba**: Chatbot trả lời thông tin liên quan về Mamba và Vision Mamba.
 - **Chat with your Custom Data** 💡: Nơi bạn có thể gửi câu hỏi của mình và nhận được câu trả lời theo thông tin bạn đã thêm vào.
-
+### Demo
+<p align="center">
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/LLM_RAG_Demo.gif" width="100%" />
+</p>
 ## Cấu trúc của Project
 Các thư mục chính của dự án được sắp xếp như sau:
 
