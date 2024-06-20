@@ -81,7 +81,7 @@ llm_rag/
     DB_COLLECTION=<Database Collection Name của bạn>
    ```
 
-### **Bước 3: Cài đặt các thư viện cần thiết:
+### **Bước 3: Cài đặt các thư viện cần thiết:**
 - Mở `terminal` và chắc chắn đang ở thư mục của project
 - Cài đặt môi trường ảo của bạn dùng `venv` hoặc `conda`:
    ```
@@ -98,13 +98,13 @@ llm_rag/
    pip install -r requirements.txt
    ```
    
-### **Bước 4: Upload dữ liệu lên MongoDB:
+### **Bước 4: Upload dữ liệu lên MongoDB:**
 Có 2 kiểu dữ liệu tương ứng 2 file:
 - Nếu dữ liệu của bạn là bản raw, pdf thì sử dụng code `src/load_pdf.py`
 - Nếu kiểu dữ liệu của bạn đã là dạng bảng thì sử dụng code `src/load_parquet.py` và tùy chỉnh cột muốn embedding
 - Nếu bạn muốn upload lên từ UI thì bỏ qua bước này
 
-### **Bước 5: Chạy Ứng dụng Streamlit:
+### **Bước 5: Chạy Ứng dụng Streamlit:**
 Để chạy file sử dụng  streamlit:
    ```
    streamlit run <file_path>.py
@@ -125,11 +125,12 @@ Trong code `src/app.py` cần chỉnh hàm `vector_search` để phù hợp vớ
 - Ấn vào `Create App`
 - Điền thông tin vào các ô tương ứng:
 <p align="center">
-  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/diagram.jpg" width="100%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit1.png" width="100%" />
 </p>  
+
 - Chọn vào Advanced Settings và đưa các biến môi trường của bạn vào đây:
 <p align="center">
-  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/diagram.jpg" width="100%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit2.png" width="100%" />
 </p>  
 
 ### **Bước 3:**
