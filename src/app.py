@@ -162,8 +162,6 @@ def pdf_to_mongodb(path):
 # Page config
 st.set_page_config(page_title="Chat with ME", page_icon="🤖")
 
-st.title("Chat with Your Custom Data")
-
 # Sidebar for file upload
 st.sidebar.title("Upload PDF Document ")
 
@@ -191,9 +189,10 @@ if uploaded_file is not None:
     except Exception as e:
         st.sidebar.error(f"Error deleting file: {e}")
 # Sidebar buttons
-sidebar_selection = st.sidebar.selectbox("Choose a page:", ["Custom Data", "Vision Mamba", "AI-Therapist"])
+sidebar_selection = st.sidebar.selectbox("Choose a page:", ["Custom Data", "AI-Therapist", "Vision Mamba"])
 
 if sidebar_selection == "Custom Data":
+    st.title("Chat with Your Custom Data")
     # Initialize chat history in session state
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = [
@@ -244,7 +243,9 @@ if sidebar_selection == "Custom Data":
                 st.write(message["content"])
                 
 elif sidebar_selection == "AI-Therapist":
+    st.title("Chat with AI-Therapist")
     st.markdown('<a href="https://nkduyen-therapist.streamlit.app/" target="_blank">CLICK HERE TO CHAT WITH AI-THERAPIST</a>', unsafe_allow_html=True)
 elif sidebar_selection == "Vision Mamba":
+    st.title("Q&A about Vision Mamba")
     st.markdown('<a href="https://nkduyen-mamba.streamlit.app/" target="_blank">CLICK HERE TO Q&A ABOUT MAMBA</a>', unsafe_allow_html=True)
 
