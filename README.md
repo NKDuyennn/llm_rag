@@ -10,8 +10,8 @@ Streamlit App này sử dụng Retrieval-Augmented Generation (RAG) kết hợp 
 * [Cách hoạt động và Demo](#-cách-hoạt-động-và-demo)
 * [Cấu trúc của Project](#cấu-trúc-của-project)
 * [Các bước triển khai](#các-bước-triển-khai)
-* [Host Streamlit App](#project-status)
-* [Room for Improvement](#room-for-improvement)
+* [Host Streamlit App](#host-streamlit-app-miễn-phí-với-streamlit-và-github)
+* [Liên hệ](#liên-hệ)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
    
