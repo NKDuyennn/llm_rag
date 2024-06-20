@@ -1,7 +1,14 @@
 # `LLM RAG` - Streamlit RAG Language Model App 🤖
 
 ## 🌟 Overview 
-This Streamlit app leverages Retrieval-Augmented Generation (RAG) by using OpenAI's Large Language Model (LLM) in conjunction with FAISS, a vector database. The app allows users to upload markdown files 📂, ask questions related to the content of these files ❓, and receive AI-generated answers based on the uploaded content 📚.
+Streamlit App này sử dụng Retrieval-Augmented Generation (RAG) kết hợp với Large Language Model (LLM) của Gemini và MongoDB, một cơ sở dữ liệu cho phép lưu trữ và tìm kiếm theo vector. Ứng dụng cho phép người dùng tải lên file PDF 📂, đặt câu hỏi liên quan đến nội dung của các file này ❓ và nhận câu trả lời được tạo ra bởi AI-generated dựa trên nội dung đã tải lên 📚. 
+
+## 🛠️ Cấu trúc hệ thống
+Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống
+<p align="center">
+  <img src="https://github.com/labrijisaad/LLM-RAG/assets/74627083/61518120-e3a0-4e76-84ea-4fb11bd82e4a" width="100%" />
+</p>
+
 
 ## ❓ How It Works
 The LLM RAG Streamlit app is structured into several key areas, each serving a specific function within the application:
