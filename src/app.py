@@ -79,20 +79,20 @@ def vector_search(user_query):
         "$vectorSearch": {
             "index": "vector_index",
             "queryVector": query_embedding,
-            "path": "client_embedding",
+            "path": "embedding",
             "numCandidates": 150,   # Number of candidate matches to consider
             "limit": 2              # Return top 2 matches
         }
     }
 
     unset_stage = {
-          "$unset": "client_embedding"    # Exclude the 'client_embedding' field from the results
+          "$unset": "embedding"    # Exclude the 'client_embedding' field from the results
     }
 
     project_stage = {
           "$project": {
               "_id": 0,     # Exclude the _id field
-              "therapist": 1,   # Include the therapist field
+              "content": 1,   # Include the therapist field
               "score": {
                   "$meta": "vectorSearchScore"  # Include the search score
               }
@@ -113,7 +113,7 @@ def get_search_result(query, conversation_history):
     search_result = ""
     for  result in get_knowledge:
         # print('---result', result)
-        search_result += f"Answer: {result.get('therapist', 'N/A')}"
+        search_result += f"Infor: {result.get('content', 'N/A')}"
         search_result += "\n"
 
     combined_information = (
