@@ -194,7 +194,7 @@ if uploaded_file is not None:
 # Initialize chat history in session state
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
-        {"type": "AI", "content": "Hello, I am an AI-Therapist. How can I help you?"}
+        {"type": "AI", "content": "Hello, I am an AI. How can I help you?"}
     ]
 
 user_query = st.chat_input("Type your message here...")
