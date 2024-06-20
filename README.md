@@ -12,7 +12,7 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 - **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF 
 
 ## ❓ Cách hoạt động:
-The LLM RAG Streamlit app is structured into several key areas, each serving a specific function within the application:
+Ứng dụng Streamlit LLM-RAG được chia thành 2 phần:
 
 <p align="center">
   <img src="https://github.com/labrijisaad/LLM-RAG/assets/74627083/61518120-e3a0-4e76-84ea-4fb11bd82e4a" width="60%" />
