@@ -160,12 +160,12 @@ def pdf_to_mongodb(path):
     print("Data ingestion into MongoDB completed")
 
 # Page config
-st.set_page_config(page_title="Chat with me", page_icon="🤖")
+st.set_page_config(page_title="Chat with ME", page_icon="🤖")
 
-st.title("Chat with AI-Therapist")
+st.title("Chat with Your Custom Data")
 
 # Sidebar for file upload
-st.sidebar.title("Upload PDF Document")
+st.sidebar.title("Upload PDF Document ")
 
 uploaded_file = st.sidebar.file_uploader("Choose a PDF file", type="pdf")
 
