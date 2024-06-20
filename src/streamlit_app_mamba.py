@@ -201,5 +201,5 @@ if sidebar_selection == "Vision Mamba":
                 st.write(message.content)
 
 elif sidebar_selection == "AI-Therapist":
-    st.markdown('<a href="https://nkduyen-therapist.streamlit.app/" target="_blank">CLICK HERE</a>', unsafe_allow_html=True)
+    st.markdown('<a href="https://nkduyen-therapist.streamlit.app/" target="_blank">CLICK HERE TO CHAT WITH AI-THERAPIST</a>', unsafe_allow_html=True)
 
