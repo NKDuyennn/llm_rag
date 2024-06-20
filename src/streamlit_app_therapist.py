@@ -145,15 +145,15 @@ if sidebar_selection == "AI-Therapist":
 
     st.title("Chat with AI-Therapist")
 
+    # Initialize chat history in session state
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = [
-            AIMessage(content="Hello, I am a AI-Therapist. How can I help you?"),
+            {"type": "AI", "content": "Hello, I am an AI-Therapist. How can I help you?"}
         ]
 
     user_query = st.chat_input("Type your message here...")
 
     if user_query:
-        
         # Initialize conversation history string
         conversation_history = ""
 
@@ -166,34 +166,33 @@ if sidebar_selection == "AI-Therapist":
             if recent_messages_count >= num_recent_messages:
                 break
             
-            if isinstance(message, HumanMessage):
-                conversation_history = f"User: {message.content}\n" + conversation_history
+            if message["type"] == "Human":
+                conversation_history = f"User: {message['content']}\n" + conversation_history
                 recent_messages_count += 1
-            elif isinstance(message, AIMessage):
-                conversation_history = f"Bot: {message.content}\n" + conversation_history
-            
+            elif message["type"] == "AI":
+                conversation_history = f"Bot: {message['content']}\n" + conversation_history
         
         print("---------------CONVERSATION_HISTORY-------------------------")
         print(conversation_history)
         print("---------------CONVERSATION_HISTORY-------------------------")
-        # conversation_history += "Given the above conversation, "
 
-        st.session_state.chat_history.append(HumanMessage(content=user_query))
+        st.session_state.chat_history.append({"type": "Human", "content": user_query})
         
         # Get the RAG-based search result
         rag_user_query = get_search_result(user_query, conversation_history)
 
         # Get the response from the model
         response = get_response(rag_user_query)
-        st.session_state.chat_history.append(AIMessage(content=response))
+        st.session_state.chat_history.append({"type": "AI", "content": response})
 
-    # Conversation
+    # Display conversation
     for message in st.session_state.chat_history:
-        if isinstance(message, AIMessage):
+        if message["type"] == "AI":
             with st.chat_message("AI"):
-                st.write(message.content)
-        elif isinstance(message, HumanMessage):
+                st.write(message["content"])
+        elif message["type"] == "Human":
             with st.chat_message("Human"):
-                st.write(message.content)
+                st.write(message["content"])
+                
 elif sidebar_selection == "Vision Mamba":
     st.markdown('<a href="https://nkduyen-mamba.streamlit.app/" target="_blank">CLICK HERE TO Q&A ABOUT MAMBA</a>', unsafe_allow_html=True)
