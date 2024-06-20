@@ -190,7 +190,14 @@ if uploaded_file is not None:
         st.sidebar.success(f"File {uploaded_file.name} deleted from {save_path}")
     except Exception as e:
         st.sidebar.error(f"Error deleting file: {e}")
+# Sidebar buttons
+sidebar_selection = st.sidebar.selectbox("Choose a page:", ["Vision Mamba", "AI-Therapist"])
 
+if sidebar_selection == "AI-Therapist":
+    st.markdown('<a href="https://nkduyen-therapist.streamlit.app/" target="_blank">CLICK HERE TO CHAT WITH AI-THERAPIST</a>', unsafe_allow_html=True)
+if sidebar_selection == "Vision Mamba":
+    st.markdown('<a href="https://nkduyen-mamba.streamlit.app/" target="_blank">CLICK HERE TO Q&A ABOUT MAMBA</a>', unsafe_allow_html=True)
+    
 # Initialize chat history in session state
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
