@@ -22,6 +22,7 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 - **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF 
 
 ## ❓ Cách hoạt động và Demo:
+- Bạn có thể sử dụng ứng dụng của mình tại đây: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)
 Ứng dụng Streamlit LLM-RAG có giao diện như sau:
 
 <p align="center">
