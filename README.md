@@ -125,12 +125,12 @@ Trong code `src/app.py` cần chỉnh hàm `vector_search` để phù hợp vớ
 - Ấn vào `Create App`
 - Điền thông tin vào các ô tương ứng:
 <p align="center">
-  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit1.png" width="100%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit1.png" width="80%" />
 </p>  
 
 - Chọn vào Advanced Settings và đưa các biến môi trường của bạn vào đây:
 <p align="center">
-  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit2.png" width="100%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit2.png" width="80%" />
 </p>  
 
 ### **Bước 3:**
