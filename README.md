@@ -28,7 +28,7 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 
 ## ❓ Cách hoạt động và Demo:
 - Bạn có thể sử dụng ứng dụng của mình tại đây: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)
-- **Lưu ý** 💡: Phải xóa file đã up lên trước khi hỏi
+- **Lưu ý** 💡: Phải xóa file đã up lên trước khi hỏi  
 Ứng dụng Streamlit LLM-RAG có giao diện như sau:
 
 <p align="center">
