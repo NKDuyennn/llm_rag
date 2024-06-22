@@ -132,6 +132,7 @@ Trong code `src/app.py` cần chỉnh hàm `vector_search` để phù hợp vớ
 
 Để host Streamlit App miễn phí, hãy làm theo các bước sau:
 ### **Bước 1: Tạo 1 Repository mới có cấu trúc giống như dự án này**
+- Cần có file `requirements.txt` và `.py`
 ### **Bước 2:**
 - Tạo tài khoản Streamlit liên kết với github của bạn
 - Ấn vào `Create App`
