@@ -19,11 +19,11 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/diagram.jpg" width="100%" />
 </p>  
 
-- **Information extraction**: Mình sử dụng Langchain chia dữ liệu ra thành nhiều chunks nhỏ với `chunk_size=512` và `chunk_overlap=64` - bạn hoàn toàn có thể thay đổi các tham số này. Sau đó mình đưa nội dung của từng chunks vào cột `content` trong bảng và lưu vào 1 `collection` của MongoDB.
-- **Vectorization**: Ở đây mình dùng Gemini API vì để có thể host lên được Streamlit miễn phí. Nếu có điều kiện bạn có thể sử dụng các model trên Hugging face, ...
-- **Relevant documents restrieval**: Sau khi đã embedding các chunks của cột `content` mình lưu vào cột `embedding` tương ứng và đánh chỉ mục `index` tìm kiếm bằng vector search cho cột này. Thông qua vector search mình sẽ so sánh độ tương đồng của user_query với các chunks của dữ liệu trong pdf.
-- **LLM-query**: Làm giàu prompt bằng `user_query + relevant_documents + history_conversation`, relevant_documents có thể tùy chỉnh trả về 1 hay nhiều dữ liệu liên quan, history_conversation có thể tùy chỉnh độ đài đoạn hội thoại trước đó muốn đưa vào prompt. Sau đó mình đưa vào model LLM của Gemini, bạn hoàn toàn có thể sử dụng các model khác.
-- **Streamlit**: Giao diện của ứng dụng được xây dựng bằng Streamlit.
+- **INFORMATION EXTRACTION**: Mình sử dụng Langchain chia dữ liệu ra thành nhiều chunks nhỏ với `chunk_size=512` và `chunk_overlap=64` - bạn hoàn toàn có thể thay đổi các tham số này. Sau đó mình đưa nội dung của từng chunks vào cột `content` trong bảng và lưu vào 1 `collection` của MongoDB.
+- **VECTORIZATION**: Ở đây mình dùng Gemini API vì để có thể host lên được Streamlit miễn phí. Nếu có điều kiện bạn có thể sử dụng các model trên Hugging face, ...
+- **RELEVANT DOCUMENTS RESTRIEVAL**: Sau khi đã embedding các chunks của cột `content` mình lưu vào cột `embedding` tương ứng và đánh chỉ mục `index` tìm kiếm bằng vector search cho cột này. Thông qua vector search mình sẽ so sánh độ tương đồng của user_query với các chunks của dữ liệu trong pdf.
+- **LLM QUERYING**: Làm giàu prompt bằng `user_query + relevant_documents + history_conversation`, relevant_documents có thể tùy chỉnh trả về 1 hay nhiều dữ liệu liên quan, history_conversation có thể tùy chỉnh độ đài đoạn hội thoại trước đó muốn đưa vào prompt. Sau đó mình đưa vào model LLM của Gemini, bạn hoàn toàn có thể sử dụng các model khác.
+- **STREAMLIT**: Giao diện của ứng dụng được xây dựng bằng Streamlit.
 - **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF - có thể tùy chỉnh các cột mà bạn muốn embedding (tham khảo file `src/load_parquet.py`
 
 ## ❓ Cách hoạt động và Demo:
