@@ -39,6 +39,7 @@ Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/LLM_RAG_Demo.gif" width="100%" />
 </p>
+
 ## Cấu trúc của Project
 Các thư mục chính của dự án được sắp xếp như sau:
 
@@ -73,7 +74,13 @@ llm_rag/
 ### **Bước 1: Cài đặt MongoDB Atlas**
 - Truy cập [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core_prosp-brand_gic-null_apac-vn_ps-all_desktop_eng_lead&utm_term=mongodb%20atlas&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624377&adgroup=115749709423&cq_cmp=12212624377&gad_source=1&gclid=CjwKCAjwps-zBhAiEiwALwsVYVTSsKs0UtYI5IacyXKIAN0ccyymKRJFysZCR8tpWMNZtbMZpXdz9xoCctkQAvD_BwE)
 - Tạo tài khoản, tạo project, tạo database, tạo collection - nơi lưu trữ dữ liệu
-- Tạo 1 cột trong collection sẽ chứa `vector embedding` đánh `chỉ mục (index)` cho cột đó
+- Tạo 1 cột trong collection sẽ chứa `vector embedding`
+- Đánh chỉ mục `index` cho cột đó
+<p align="center">
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/index1.png" width="60%" />
+  <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/index2.png" width="60%" />
+</p>  
+
 - Lấy MongoDB URI của database vừa tạo [Hướng dẫn](https://www.mongodb.com/docs/v5.2/reference/connection-string/)
 
 ### **Bước 2: Tạo biến môi trường**
