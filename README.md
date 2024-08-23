@@ -12,6 +12,7 @@ This Streamlit App uses Retrieval-Augmented Generation (RAG) combined with the G
 * [Project Structure](#project-structure)
 * [Deployment Steps](#deployment-steps)
 * [Host Streamlit App](#host-streamlit-app-for-free-with-streamlit-and-github)
+* [Future Development Directions](#future-development-directions)
 * [Contact](#-contact)
 
 ## System Architecture:
@@ -158,6 +159,16 @@ Deploy, and you have successfully hosted your Streamlit App. You can use the app
 
 ### **Note**
 Since this is a free plan, the resources provided by Streamlit are limited, so it is advisable to use an embedding model with an API Key.
+
+## Future Development Directions
+
+### Development 1:
+The project plans to add a sign language recognition feature using AI and Computer Vision to capture real-time video from users. The system will recognize sign language, translate it into complete sentences, and input it into the chatbot system without the need for the user to type.  
+A demo of the sign language recognition feature can be found in the `sign_language_translation` folder.
+
+### Development 2:
+The project plans to add a speech recognition feature that will translate spoken words into complete sentences and input them into the chatbot system.  
+Currently, this feature has not yet been developed.
 
 ## 🌐 Contact:
 <div align="center">
