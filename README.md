@@ -68,11 +68,11 @@ llm_rag/
 ```
 
 ## Prepare
-- Python 3.9 trở đi
+- Python 3.9 or later
 - Streamlit
 - MongoDB
-- Sentence Transformer (Nếu không dùng API của Gemini)
-- Google GenerativeAI
+- Sentence Transformer (If not using the Gemini API)
+- Google Generative AI
 - Langchain
 
 ## Deployment Steps
