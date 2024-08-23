@@ -1,19 +1,20 @@
 # `LLM RAG` - Streamlit RAG Language Model App 🤖
 
-## 🌟 Tổng Quan 
+## 🌟 Overview 
 This Streamlit App uses Retrieval-Augmented Generation (RAG) combined with the Gemini Large Language Model (LLM) and MongoDB, a database that allows for vector storage and search. The application enables users to upload PDF files 📂, ask questions related to the content of these files ❓, and receive AI-generated answers based on the uploaded content 📚.
 
-## Mục lục
+## Table of contents
 * [Overview](#-overview)
 * [Table of Contents](#table-of-contents)
 * [System Architecture](#system-architecture)
 * [How It Works and Demo](#-how-it-works-and-demo)
+* [Prepare](#prepare)
 * [Project Structure](#project-structure)
 * [Deployment Steps](#deployment-steps)
 * [Host Streamlit App](#host-streamlit-app-for-free-with-streamlit-and-github)
 * [Contact](#-contact)
 
-## Cấu trúc hệ thống:
+## System Architecture:
 The diagram below illustrates the data flow through the system:
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/diagram.jpg" width="100%" />
@@ -26,7 +27,7 @@ The diagram below illustrates the data flow through the system:
 - **STREAMLIT**: The application's interface is built with Streamlit.
 - **Note** 💡: This can also be applied to data sources in table format, without needing to process PDF files—you can customize the columns you want to embed `src/load_parquet.py` .
 
-## ❓ Cách hoạt động và Demo:  
+## ❓ How It Works and Demo:  
 - You can use my application here: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)
 - **Note** 💡: You must delete the uploaded file before asking questions  
 The Streamlit LLM-RAG application interface is as follows:
@@ -45,7 +46,7 @@ The Streamlit LLM-RAG application interface is as follows:
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/LLM_RAG_Demo.gif" width="100%" />
 </p>
 
-## Cấu trúc của Project
+## Project Structure
 The main directories of the project are organized as follows:
 
 ```
@@ -65,7 +66,7 @@ llm_rag/
 |--- requirements.txt              # Libraries required for the project
 ```
 
-## Chuẩn bị
+## Prepare
 - Python 3.9 trở đi
 - Streamlit
 - MongoDB
@@ -73,7 +74,7 @@ llm_rag/
 - Google GenerativeAI
 - Langchain
 
-## Các bước triển khai
+## Deployment Steps
 To deploy the project on your computer, follow these steps:
 
 ### **Step 1: Install MongoDB Atlas**
@@ -133,7 +134,7 @@ The Streamlit application will be deployed at **`http://localhost:8501`** after 
 ### **Note**
 In the `src/app.py` code, you need to adjust the `vector_search` function to match the `index` you created in the database and any related parameters.  
 
-## Host Streamlit App miễn phí với Streamlit và github:
+## Host streamlit app for free with streamlit and github:
 Hosting a Streamlit app for free:
 
 ### **Step 1: Create a New Repository with a Structure Similar to This Project**
@@ -158,7 +159,7 @@ Deploy, and you have successfully hosted your Streamlit App. You can use the app
 ### **Note**
 Since this is a free plan, the resources provided by Streamlit are limited, so it is advisable to use an embedding model with an API Key.
 
-## 🌐 Liên hệ:
+## 🌐 Contact:
 <div align="center">
   <a href="https://www.facebook.com/nkduyen.2310/">
   <img src="https://img.shields.io/badge/Facebook-%233b5998.svg?&style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" style="margin-bottom: 5px;"/>
