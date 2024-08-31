@@ -1,163 +1,176 @@
 # `LLM RAG` - Streamlit RAG Language Model App 🤖
 
-## 🌟 Tổng Quan 
-Streamlit App này sử dụng Retrieval-Augmented Generation (RAG) kết hợp với Large Language Model (LLM) của Gemini và MongoDB, một cơ sở dữ liệu cho phép lưu trữ và tìm kiếm theo vector. Ứng dụng cho phép người dùng tải lên file PDF 📂, đặt câu hỏi liên quan đến nội dung của các file này ❓ và nhận câu trả lời được tạo ra bởi AI-generated dựa trên nội dung đã tải lên 📚. 
+## 🌟 Overview 
+This Streamlit App uses Retrieval-Augmented Generation (RAG) combined with the Gemini Large Language Model (LLM) and MongoDB, a database that allows for vector storage and search. The application enables users to upload PDF files 📂, ask questions related to the content of these files ❓, and receive AI-generated answers based on the uploaded content 📚.
 
-## Mục lục
-* [Tổng quan](#-tổng-quan)
-* [Mục lục](#mục-lục)
-* [Cấu trúc hệ thống](#cấu-trúc-hệ-thống)
-* [Cách hoạt động và Demo](#-cách-hoạt-động-và-demo)
-* [Cấu trúc của Project](#cấu-trúc-của-project)
-* [Các bước triển khai](#các-bước-triển-khai)
-* [Host Streamlit App](#host-streamlit-app-miễn-phí-với-streamlit-và-github)
-* [Liên hệ](#-liên-hệ)
+## Table of contents
+* [Overview](#-overview)
+* [Table of Contents](#table-of-contents)
+* [System Architecture](#system-architecture)
+* [How It Works and Demo](#-how-it-works-and-demo)
+* [Prepare](#prepare)
+* [Project Structure](#project-structure)
+* [Deployment Steps](#deployment-steps)
+* [Host Streamlit App](#host-streamlit-app-for-free-with-streamlit-and-github)
+* [Future Development Directions](#future-development-directions)
+* [Contact](#-contact)
 
-## Cấu trúc hệ thống:
-Sơ đồ dưới đây minh họa luồng dữ liệu qua hệ thống:
+## System Architecture:
+The diagram below illustrates the data flow through the system:
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/diagram.jpg" width="100%" />
 </p>  
 
-- **INFORMATION EXTRACTION**: Mình sử dụng Langchain chia dữ liệu ra thành nhiều chunks nhỏ với `chunk_size=512` và `chunk_overlap=64` - bạn hoàn toàn có thể thay đổi các tham số này. Sau đó mình đưa nội dung của từng chunks vào cột `content` trong bảng và lưu vào 1 `collection` của MongoDB.
-- **VECTORIZATION**: Ở đây mình dùng Gemini API vì để có thể host lên được Streamlit miễn phí. Nếu có điều kiện bạn có thể sử dụng các model trên Hugging face, ...
-- **RELEVANT DOCUMENTS RESTRIEVAL**: Sau khi đã embedding các chunks của cột `content` mình lưu vào cột `embedding` tương ứng và đánh chỉ mục `index` tìm kiếm bằng vector search cho cột này. Thông qua vector search mình sẽ so sánh độ tương đồng của user_query với các chunks của dữ liệu trong pdf.
-- **LLM QUERYING**: Làm giàu prompt bằng `user_query + relevant_documents + history_conversation`, relevant_documents có thể tùy chỉnh trả về 1 hay nhiều dữ liệu liên quan, history_conversation có thể tùy chỉnh độ đài đoạn hội thoại trước đó muốn đưa vào prompt. Sau đó mình đưa vào model LLM của Gemini, bạn hoàn toàn có thể sử dụng các model khác.
-- **STREAMLIT**: Giao diện của ứng dụng được xây dựng bằng Streamlit.
-- **Lưu ý** 💡: Có thể áp dụng cả với những nguồn dữ liệu ở dạng bảng sẵn, không cần phải xử lý file PDF - có thể tùy chỉnh các cột mà bạn muốn embedding (tham khảo file `src/load_parquet.py`
+- **INFORMATION EXTRACTION**: I use LangChain to split the data into smaller chunks with `chunk_size=512` and `chunk_overlap=64`—these parameters can be adjusted. Then, I store the content of each chunk in the `content` column of a table and save it in a `collection` in MongoDB.
+- **VECTORIZATION**: Here, I use the Gemini API to host the application for free on Streamlit. If you have the resources, you can use models on Hugging Face or others.
+- **RELEVANT DOCUMENTS RETRIEVAL**: After embedding the chunks from the `content` column, I store them in the corresponding `embedding` column and create a search index using vector search for this column. Through vector search, I compare the similarity between the `user_query` and the data chunks from the PDF.
+- **LLM QUERYING**: The prompt is enriched by combining `user_query + relevant_documents + history_conversation`. You can customize the number of relevant documents returned and adjust the length of the previous conversation history included in the prompt. Then, I feed this into Gemini’s LLM model, though you can use other models.
+- **STREAMLIT**: The application's interface is built with Streamlit.
+- **Note** 💡: This can also be applied to data sources in table format, without needing to process PDF files—you can customize the columns you want to embed `src/load_parquet.py` .
 
-## ❓ Cách hoạt động và Demo:
-- Bạn có thể sử dụng ứng dụng của mình tại đây: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)
-- **Lưu ý** 💡: Phải xóa file đã up lên trước khi hỏi  
-Ứng dụng Streamlit LLM-RAG có giao diện như sau:
+## ❓ How It Works and Demo:  
+- You can use my application here: [LLM-RAG](https://nkduyen-customdata.streamlit.app/)
+- **Note** 💡: You must delete the uploaded file before asking questions  
+The Streamlit LLM-RAG application interface is as follows:
 
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/ui.png" width="100%" />
 </p>
 
-- **Upload PDF Document** 📂: Tải lên file PDF chứa dữ liệu mà bạn muốn thêm thông tin cho Model
-- **Choose a page** 🔍: Có thể chọn một vài mô hình mà mình đã cài đặt từ trước
-    - **AI-Therapist**: Chatbot tư vấn tâm lý được đào tạo từ tập dữ liệu [mental-health-dataset](https://huggingface.co/datasets/fadodr/mental_health_dataset?row=75).
-    - **Vision Mamba**: Chatbot trả lời thông tin liên quan về Mamba và Vision Mamba.
-- **Chat with your Custom Data** 💡: Nơi bạn có thể gửi câu hỏi của mình và nhận được câu trả lời theo thông tin bạn đã thêm vào.
+- **Upload PDF Document** 📂: Upload the PDF file containing the data you want to enrich the model with.
+- **Choose a page** 🔍: You can select from several pre-installed models:
+    - **AI-Therapist**: A psychological counseling chatbot trained on the [mental-health-dataset](https://huggingface.co/datasets/fadodr/mental_health_dataset?row=75).
+    - **Vision Mamba**: A chatbot that provides information related to Mamba and Vision Mamba.
+- **Chat with your Custom Data** 💡: This is where you can submit your questions and receive answers based on the information you’ve added.
 ### Demo
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/LLM_RAG_Demo.gif" width="100%" />
 </p>
 
-## Cấu trúc của Project
-Các thư mục chính của dự án được sắp xếp như sau:
+## Project Structure
+The main directories of the project are organized as follows:
 
 ```
 llm_rag/
 |--- .devcontainer/
-  |--- devcontainer.json           # Tệp cấu hình cho development evironment
-|--- data/                           # Dữ liệu muốn Chatbot biết thêm 
-|--- image/                          # Thư mục ảnh của dự án
+  |--- devcontainer.json           # Configuration file for the development environment
+|--- data/                         # Data for the Chatbot to learn
+|--- image/                        # Project image directory
 |--- src/
-  |--- app.py                      # Code ứng dụng Chat with Your Custom Data
-  |--- load_parquet.py             # Code để xử lý dữ liệu dạng .parquet lên database và embedding
-  |--- app.py                      # Code để xử lý dữ liệu pdf embedding và upload lên database
-  |--- streamlit_app_mamba.py      # Code ứng dụng Q&A about Mamba
-  |--- streamlit_app_therapist.py  # Code ứng dụng Chat with AI-Therapist
-|--- .env.example                    # File biến môi trường mẫu
-|--- README.md                       # File này
-|--- requirements.txt                # Thư viện cần sử dụng trong dự án
+  |--- app.py                      # Code for the Chat with Your Custom Data application
+  |--- load_parquet.py             # Code for processing .parquet data into the database and embedding
+  |--- app.py                      # Code for processing PDF data embedding and uploading to the database
+  |--- streamlit_app_mamba.py      # Code for the Q&A about Mamba application
+  |--- streamlit_app_therapist.py  # Code for the Chat with AI-Therapist application
+|--- .env.example                  # Sample environment variable file
+|--- README.md                     # This file
+|--- requirements.txt              # Libraries required for the project
 ```
 
-## Chuẩn bị
-- Python 3.9 trở đi
+## Prepare
+- Python 3.9 or later
 - Streamlit
 - MongoDB
-- Sentence Transformer (Nếu không dùng API của Gemini)
-- Google GenerativeAI
+- Sentence Transformer (If not using the Gemini API)
+- Google Generative AI
 - Langchain
 
-## Các bước triển khai
-Để triển khai dự án trên máy tính của bạn, hãy làm theo các bước sau
+## Deployment Steps
+To deploy the project on your computer, follow these steps:
 
-### **Bước 1: Cài đặt MongoDB Atlas**
-- Truy cập [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core_prosp-brand_gic-null_apac-vn_ps-all_desktop_eng_lead&utm_term=mongodb%20atlas&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624377&adgroup=115749709423&cq_cmp=12212624377&gad_source=1&gclid=CjwKCAjwps-zBhAiEiwALwsVYVTSsKs0UtYI5IacyXKIAN0ccyymKRJFysZCR8tpWMNZtbMZpXdz9xoCctkQAvD_BwE)
-- Tạo tài khoản, tạo project, tạo database, tạo collection - nơi lưu trữ dữ liệu
-- Tạo 1 cột trong collection sẽ chứa `vector embedding`
-- Đánh chỉ mục `index` cho cột đó
+### **Step 1: Install MongoDB Atlas**
+- Visit [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core_prosp-brand_gic-null_apac-vn_ps-all_desktop_eng_lead&utm_term=mongodb%20atlas&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624377&adgroup=115749709423&cq_cmp=12212624377&gad_source=1&gclid=CjwKCAjwps-zBhAiEiwALwsVYVTSsKs0UtYI5IacyXKIAN0ccyymKRJFysZCR8tpWMNZtbMZpXdz9xoCctkQAvD_BwE)
+- Create an account, create a project, create a database, and create a collection to store your data
+- Create a column in the collection that will contain the `vector embedding`
+- Create an `index` for that column
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/index1.png" width="60%" />
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/index2.png" width="60%" />
 </p>  
 
-- Lấy MongoDB URI của database vừa tạo [Hướng dẫn](https://www.mongodb.com/docs/v5.2/reference/connection-string/)
+- Obtain the MongoDB URI for the database you just created [Instructions](https://www.mongodb.com/docs/v5.2/reference/connection-string/)
 
-### **Bước 2: Tạo biến môi trường**
-   Tạo một file `.env` trong dự án của bạn gồm có:
+### **Step 2: Create Environment Variables**
+   Create a `.env` file in your project with the following content:
    ```
-    GOOGLE_API_KEY = <Gemnini API Key của bạn>
-    MONGODB_URI = <MongoDB-URI của bạn>
-    EMBEDDING_MODEL = <Đường dẫn model embedding Hugging face>  #Nếu không dùng Model Gemini Embedding
-    DB_NAME = <Database Name của bạn>
-    DB_COLLECTION = <Database Collection Name của bạn>
+    GOOGLE_API_KEY = <Your Gemini API Key>
+    MONGODB_URI = <Your MongoDB URI>
+    EMBEDDING_MODEL = <Path to the Hugging Face embedding model>  # If not using the Gemini Embedding Model
+    DB_NAME = <Your Database Name>
+    DB_COLLECTION = <Your Database Collection Name>
    ```
 
-### **Bước 3: Cài đặt các thư viện cần thiết:**
-- Mở `terminal` và chắc chắn đang ở thư mục của project
-- Cài đặt môi trường ảo của bạn dùng `venv` hoặc `conda`:
+### **Step 3: Install Required Libraries:**
+- Open the `terminal` and ensure you are in the project directory
+- Set up your virtual environment using `venv` or `conda`:
    ```
-   # Sử dụng venv
+   # Using venv
    python -m venv env_llm_rag
    source env_llm_rag/bin/activate
    
-   # Sử dụng conda
+   # Using conda
    conda create --name env_llm_rag
    conda activate env_llm_rag
    ```
-- Cài đặt các thư viện cần thiết:
+- Install the required libraries:
    ```
    pip install -r requirements.txt
    ```
    
-### **Bước 4: Upload dữ liệu lên MongoDB:**
-Có 2 kiểu dữ liệu tương ứng 2 file:
-- Nếu dữ liệu của bạn là bản raw, pdf thì sử dụng code `src/load_pdf.py`
-- Nếu kiểu dữ liệu của bạn đã là dạng bảng thì sử dụng code `src/load_parquet.py` và tùy chỉnh cột muốn embedding
-- Nếu bạn muốn upload lên từ UI thì bỏ qua bước này
+### **Step 4: Upload Data to MongoDB:**
+There are two types of data corresponding to two files:
+- If your data is raw, in PDF format, use the code `src/load_pdf.py`
+- If your data is already in table format, use the code `src/load_parquet.py` and customize the columns you want to embed
+- If you want to upload data from the UI, you can skip this step
 
-### **Bước 5: Chạy Ứng dụng Streamlit:**
-Để chạy file sử dụng  streamlit:
+### **Step 5: Run the Streamlit Application:**
+To run the file using Streamlit:
    ```
    streamlit run <file_path>.py
    ```
-- Tham khảo code `src/streamlit_app_mamba.py` nếu đã xử lý xong dữ liệu
-- Tham khảo code `src/app.py` nếu muốn xử lý file pdf up lên từ UI
-Ứng dụng Streamlit sẽ được triển khai tại **`http://localhost:8501`** sau khi chạy dòng lệnh trên
+- Refer to the code `src/streamlit_app_mamba.py` if your data processing is complete
+- Refer to the code `src/app.py` if you want to process PDF files uploaded from the UI
+The Streamlit application will be deployed at **`http://localhost:8501`** after running the above command
 
-### **Lưu ý**
-Trong code `src/app.py` cần chỉnh hàm `vector_search` để phù hợp với `index` bạn tạo trong database cũng như các tham số liên quan.
+### **Note**
+In the `src/app.py` code, you need to adjust the `vector_search` function to match the `index` you created in the database and any related parameters.  
 
-## Host Streamlit App miễn phí với Streamlit và github:
+## Host streamlit app for free with streamlit and github:
+Hosting a Streamlit app for free:
 
-Để host Streamlit App miễn phí, hãy làm theo các bước sau:
-### **Bước 1: Tạo 1 Repository mới có cấu trúc giống như dự án này**
-- Cần có file `requirements.txt` và `.py`
-### **Bước 2:**
-- Tạo tài khoản Streamlit liên kết với github của bạn
-- Ấn vào `Create App`
-- Điền thông tin vào các ô tương ứng:
+### **Step 1: Create a New Repository with a Structure Similar to This Project**
+- Make sure the repository includes a `requirements.txt` file and a `.py` file.
+
+### **Step 2:**
+- Create a Streamlit account and link it to your GitHub account.
+- Click on `Create App`.
+- Fill in the corresponding fields:
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit1.png" width="80%" />
 </p>  
 
-- Chọn vào Advanced Settings và đưa các biến môi trường của bạn vào đây:
+- Select Advanced Settings and add your environment variables here:
 <p align="center">
   <img src="https://github.com/NKDuyennn/llm_rag/blob/nkduyen/image/streamlit2.png" width="80%" />
 </p>  
 
-### **Bước 3:**
-Deploy và bạn đã host thành công, bạn có thể sử dụng Streamlit App theo đường link dạng `<tên miền của bạn>.streamlit.app`
+### **Step 3:**
+Deploy, and you have successfully hosted your Streamlit App. You can use the app via a link like `<your-domain>.streamlit.app`.
 
-### **Lưu ý**
-Vì dùng free, không phải trả phí nên tài nguyên Streamlit cấp cho ít, nên sử dụng embedding model với API-Key. 
+### **Note**
+Since this is a free plan, the resources provided by Streamlit are limited, so it is advisable to use an embedding model with an API Key.
 
-## 🌐 Liên hệ:
+## Future Development Directions
+
+### Development 1:
+The project plans to add a sign language recognition feature using AI and Computer Vision to capture real-time video from users. The system will recognize sign language, translate it into complete sentences, and input it into the chatbot system without the need for the user to type.  
+A demo of the sign language recognition feature can be found in the `sign_language_translation` folder.
+
+### Development 2:
+The project plans to add a speech recognition feature that will translate spoken words into complete sentences and input them into the chatbot system.  
+Currently, this feature has not yet been developed.
+
+## 🌐 Contact:
 <div align="center">
   <a href="https://www.facebook.com/nkduyen.2310/">
   <img src="https://img.shields.io/badge/Facebook-%233b5998.svg?&style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" style="margin-bottom: 5px;"/>
